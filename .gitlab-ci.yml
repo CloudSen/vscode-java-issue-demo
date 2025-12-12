@@ -1,0 +1,2 @@
+include:
+  - remote: 'https://git.cisdigital.cn/specification/java-specification/big-data-specification/elite-forge-specification/-/raw/main/elite-forge-gitlab-runner/.gitlab-ci.yml'

@@ -1,0 +1,17 @@
+app:
+  spring:
+    mybatis-plus:
+      mapper-locations: classpath*:mapper/@activedDatasource@/**/*.xml
+    messages:
+      basename: i18n/web,i18n/mybatis-plus,i18n/httpexchange,i18n/demo-service
+
+cisdigital:
+  app:
+    default-app-id: ${spring.application.name}
+    config:
+      app-cisdigital-my-product-demo-service:
+        tenancy:
+          100000:
+            # 请配置此处使用的中间件
+            #redis: dev-redis
+            #datasource: oceanbase1

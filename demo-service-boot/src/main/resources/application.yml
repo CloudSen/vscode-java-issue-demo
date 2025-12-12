@@ -1,0 +1,41 @@
+spring:
+  application:
+    name: app-cisdigital-my-product-demo-service
+  profiles:
+    group:
+      run:
+        # 部署到波塞冬平台时，修改为固定值，如dm
+        # 本地启动时，记得通过maven profile去激活
+        - @activedDatasource@
+        - var
+        - common-config
+        - custom
+      test:
+        - @activedDatasource@
+        - var
+        - common-config
+        - custom
+    active:
+      - run
+  cloud:
+    # k8s or nacos
+    kubernetes:
+      client:
+        # 部署到波塞冬平台时，修改为"项目-环境"
+        namespace: local
+      discovery:
+        enabled: false
+      reload:
+        enabled: true
+        mode: EVENT
+        # polling only
+        period: 5s
+      config:
+        fail-fast: true
+
+  config:
+    import:
+      - optional:classpath:env/${spring.application.name}-var.yml
+      - optional:classpath:env/${spring.application.name}-common-config.yml
+      - optional:classpath:config/custom.yml
+      - "optional:kubernetes:"

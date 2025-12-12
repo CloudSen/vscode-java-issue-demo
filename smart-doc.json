@@ -1,0 +1,20 @@
+{
+  "projectName": "app-cisdigital-my-product-demo-service",
+  "openUrl": "https://torna.cisdigital.cn/api",
+  "appToken": "输入前端接口项目中的应用token",
+  "pathPrefix": "",
+  "packageFilters": "输入前端接口controller对应的包全名",
+  "outPath": "target/api-docs",
+  "isStrict": true,
+  "showAuthor": false,
+  "inlineEnum": true,
+  "tornaDebug": true,
+  "replace": true,
+  "dataDictionaries": [
+    {
+      "enumClassName": "cn.cisdigital.elite.forge.infra.commons.interfaces.enums.BizEnum",
+      "codeField": "code",
+      "descField": "messageKey"
+    }
+  ]
+}

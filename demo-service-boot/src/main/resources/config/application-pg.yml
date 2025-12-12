@@ -1,0 +1,6 @@
+# sql关键字包裹方式
+mybatis-plus:
+  global-config:
+    db-config:
+      capital-mode: true
+      column-format: "\"%s\""

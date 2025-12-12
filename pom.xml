@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>3.5.7</version>
+    <relativePath />
+  </parent>
+  <groupId>cn.cisdigital.my.product</groupId>
+  <artifactId>app-cisdigital-my-product-demo-service</artifactId>
+  <version>${revision}</version>
+  <packaging>pom</packaging>
+  <name>app-cisdigital-my-product-demo-service</name>
+  <description>
+        Demo Service
+  </description>
+  <modules>
+    <module>demo-service-model</module>
+    <module>demo-service-client</module>
+    <module>demo-service-biz</module>
+    <module>demo-service-boot</module>
+  </modules>
+  <properties>
+    <java.version>21</java.version>
+    <revision>nightly-SNAPSHOT</revision>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+  </properties>
+  <dependencyManagement>
+    <dependencies>
+
+      <!-- 自身模块 -->
+      <dependency>
+        <groupId>cn.cisdigital.my.product</groupId>
+        <artifactId>app-cisdigital-my-product-demo-service-biz</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>cn.cisdigital.my.product</groupId>
+        <artifactId>app-cisdigital-my-product-demo-service-client</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>cn.cisdigital.my.product</groupId>
+        <artifactId>app-cisdigital-my-product-demo-service-model</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.14.0</version>
+        <configuration>
+          <annotationProcessorPaths>
+            <path>
+              <groupId>org.projectlombok</groupId>
+              <artifactId>lombok</artifactId>
+            </path>
+          </annotationProcessorPaths>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>flatten-maven-plugin</artifactId>
+        <version>1.7.2</version>
+        <configuration>
+          <updatePomFile>true</updatePomFile>
+          <flattenMode>resolveCiFriendliesOnly</flattenMode>
+        </configuration>
+        <executions>
+          <execution>
+            <id>flatten</id>
+            <phase>package</phase>
+            <goals>
+              <goal>flatten</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>flatten.clean</id>
+            <phase>clean</phase>
+            <goals>
+              <goal>clean</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>com.diffplug.spotless</groupId>
+        <artifactId>spotless-maven-plugin</artifactId>
+        <version>2.46.1</version>
+        <configuration>
+          <java>
+            <eclipse>
+              <sortMembersEnabled>true</sortMembersEnabled>
+              <sortMembersOrder>SF,SI,SM,F,I,C,M,T</sortMembersOrder>
+              <sortMembersVisibilityOrderEnabled>true</sortMembersVisibilityOrderEnabled>
+              <sortMembersVisibilityOrder>B,R,D,V</sortMembersVisibilityOrder>
+            </eclipse>
+            <importOrder>
+              <wildcardsLast>false</wildcardsLast>
+              <order>,javax,java,\#</order>
+              <semanticSort>false</semanticSort>
+            </importOrder>
+            <removeUnusedImports />
+            <trimTrailingWhitespace />
+            <endWithNewline />
+          </java>
+          <upToDateChecking>
+            <enabled>true</enabled>
+            <indexFile>${project.basedir}/spotless-index</indexFile> <!-- optional, default is
+              ${project.build.directory}/spotless-index -->
+          </upToDateChecking>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>install</phase>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>
